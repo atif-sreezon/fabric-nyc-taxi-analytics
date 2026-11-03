@@ -42,7 +42,7 @@
                 "sink": {
                   "type": "BinarySink",
                   "storeSettings": {
-                    "type": "LakehouseWriteSettings"
+                    "type": "AzureBlobStorageWriteSettings"
                   },
                   "datasetSettings": {
                     "type": "Binary",
@@ -117,7 +117,7 @@
           "sink": {
             "type": "BinarySink",
             "storeSettings": {
-              "type": "LakehouseWriteSettings"
+              "type": "AzureBlobStorageWriteSettings"
             },
             "datasetSettings": {
               "type": "Binary",
@@ -153,7 +153,14 @@
           "secureOutput": false
         },
         "name": "copy-taxi-zone-lookup",
-        "dependsOn": []
+        "dependsOn": [
+          {
+            "activity": "ForEachFile",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
       },
       {
         "type": "TridentNotebook",
@@ -220,6 +227,57 @@
             ]
           }
         ]
+      },
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "d7f08606-3a08-ad43-4f71-ee40d95cf69e",
+          "workspaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "silver_to_gold_transformation",
+        "dependsOn": [
+          {
+            "activity": "silver_to_bronze_transformation",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Office365Email",
+        "typeProperties": {
+          "body": "<p>Copy job failed.</p>\n<p>Workspace ID: @{pipeline().DataFactory}</p>\n<p>Pipeline ID: @{pipeline().Pipeline}</p>\n<p>Pipeline parameters: @{pipeline().parameters.file_list}</p>\n<p>Pipeline run ID: @{pipeline().RunId}</p>",
+          "to": "OwenH@3501751.xyz",
+          "subject": "!! NYC Taxi Trip Copy failed !!"
+        },
+        "externalReferences": {
+          "connection": "309c1eac-bb4d-47a8-b0d3-e31615e0a589"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Copy job failed alert",
+        "description": "This sends an alert to the workspace admin in case the copy from source fails.",
+        "dependsOn": [
+          {
+            "activity": "ForEachFile",
+            "dependencyConditions": [
+              "Failed"
+            ]
+          }
+        ]
       }
     ],
     "parameters": {
@@ -227,15 +285,15 @@
         "type": "array",
         "defaultValue": [
           {
-            "file": "yellow_tripdata_2026-01.parquet",
+            "file": "yellow_tripdata_2026-04.parquet",
             "year": "2026"
           },
           {
-            "file": "yellow_tripdata_2026-02.parquet",
+            "file": "yellow_tripdata_2026-05.parquet",
             "year": "2026"
           },
           {
-            "file": "yellow_tripdata_2026-03.parquet",
+            "file": "yellow_tripdata_2026-06.parquet",
             "year": "2026"
           }
         ]

@@ -1,0 +1,89 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "BinarySource",
+            "formatSettings": {
+              "type": "BinaryReadSettings"
+            },
+            "storeSettings": {
+              "type": "HttpReadSettings",
+              "requestMethod": "GET"
+            },
+            "datasetSettings": {
+              "type": "Binary",
+              "typeProperties": {
+                "location": {
+                  "type": "HttpServerLocation",
+                  "relativeUrl": {
+                    "value": "@concat('v1/archive?latitude=40.7128&longitude=-74.0060&start_date=', concat(pipeline().parameters.start_month, '-01'), '&end_date=', formatDateTime(addDays(addToTime(concat(pipeline().parameters.end_month, '-01'), 1, 'Month'), -1), 'yyyy-MM-dd'), '&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum,rain_sum,snowfall_sum,wind_speed_10m_max,weather_code&timezone=America/New_York')",
+                    "type": "Expression"
+                  }
+                }
+              },
+              "externalReferences": {
+                "connection": "87fa2dec-91f7-4529-be75-037c9fc2f0f5"
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "BinarySink",
+            "storeSettings": {
+              "type": "LakehouseWriteSettings"
+            },
+            "datasetSettings": {
+              "type": "Binary",
+              "typeProperties": {
+                "location": {
+                  "type": "LakehouseLocation",
+                  "folderPath": "bronze/weather",
+                  "fileName": {
+                    "value": "@concat('nyc_weather_', concat(pipeline().parameters.start_month, '-01'), '_', formatDateTime(addDays(addToTime(concat(pipeline().parameters.end_month, '-01'), 1, 'Month'), -1), 'yyyy-MM-dd'),'.json')",
+                    "type": "Expression"
+                  }
+                }
+              },
+              "linkedService": {
+                "name": "lakehouse",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "5c878629-f245-bec7-47da-2968615cb6d6",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Files"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "enableStaging": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "copy_weather_to_bronze",
+        "dependsOn": []
+      }
+    ],
+    "parameters": {
+      "start_month": {
+        "type": "string",
+        "defaultValue": "2026-01"
+      },
+      "end_month": {
+        "type": "string",
+        "defaultValue": "2026-02"
+      }
+    }
+  }
+}
