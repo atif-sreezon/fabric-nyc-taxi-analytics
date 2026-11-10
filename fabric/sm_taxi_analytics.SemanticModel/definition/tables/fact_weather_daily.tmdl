@@ -1,0 +1,149 @@
+table fact_weather_daily
+	lineageTag: c2fee075-dd2d-43ba-af6d-f8ca21425a00
+	sourceLineageTag: [gold].[fact_weather_daily]
+
+	column date
+		dataType: dateTime
+		isHidden
+		formatString: General Date
+		lineageTag: 5bc0ab54-ea4e-40a8-88d0-d3b381dab778
+		sourceLineageTag: date
+		summarizeBy: none
+		sourceColumn: date
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column temp_max_c
+		dataType: double
+		lineageTag: 06a9e2a9-1cf3-4469-a524-dee67fa97736
+		sourceLineageTag: temp_max_c
+		summarizeBy: sum
+		sourceColumn: temp_max_c
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column temp_min_c
+		dataType: double
+		lineageTag: 6514ec42-20b1-40f2-90ff-0cc97aa6e265
+		sourceLineageTag: temp_min_c
+		summarizeBy: sum
+		sourceColumn: temp_min_c
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column temp_mean_c
+		dataType: double
+		lineageTag: 887ca240-0631-491e-8ea8-5c801c0ebbea
+		sourceLineageTag: temp_mean_c
+		summarizeBy: sum
+		sourceColumn: temp_mean_c
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column precipitation_mm
+		dataType: double
+		lineageTag: 1bf13a06-1038-4e7d-bd69-74bdd08b6dc4
+		sourceLineageTag: precipitation_mm
+		summarizeBy: sum
+		sourceColumn: precipitation_mm
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column rain_mm
+		dataType: double
+		lineageTag: cd29ef6c-f1e7-42c0-aed7-a49fc7149a81
+		sourceLineageTag: rain_mm
+		summarizeBy: sum
+		sourceColumn: rain_mm
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column snowfall_cm
+		dataType: double
+		lineageTag: beecf9be-8209-48aa-8a2b-9b08af24876d
+		sourceLineageTag: snowfall_cm
+		summarizeBy: sum
+		sourceColumn: snowfall_cm
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column wind_max_kmh
+		dataType: double
+		lineageTag: 7ef917df-0587-4c69-8d31-dde1c9179892
+		sourceLineageTag: wind_max_kmh
+		summarizeBy: sum
+		sourceColumn: wind_max_kmh
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column weather_code
+		dataType: int64
+		formatString: 0
+		lineageTag: ef23eee8-f689-4065-a87e-5a1bef331fc8
+		sourceLineageTag: weather_code
+		summarizeBy: sum
+		sourceColumn: weather_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_rainy
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 86c14b11-3876-479b-8b2f-ea55cf75894f
+		sourceLineageTag: is_rainy
+		summarizeBy: none
+		sourceColumn: is_rainy
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_snowy
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 523ee87a-8942-4fdb-b55c-8c7026a0b93a
+		sourceLineageTag: is_snowy
+		summarizeBy: none
+		sourceColumn: is_snowy
+
+		annotation SummarizationSetBy = Automatic
+
+	column precip_category
+		dataType: string
+		lineageTag: 12332cd6-6b99-4c0a-ae0e-cb98bd8d4b04
+		sourceLineageTag: precip_category
+		summarizeBy: none
+		sourceColumn: precip_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column temp_band
+		dataType: string
+		lineageTag: f25dd92d-8bcf-400a-8196-d7f3d03be5a4
+		sourceLineageTag: temp_band
+		summarizeBy: none
+		sourceColumn: temp_band
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_weather_daily = entity
+		mode: directLake
+		source
+			entityName: fact_weather_daily
+			schemaName: gold
+			expressionSource: 'DirectLake - lakehouse'
+

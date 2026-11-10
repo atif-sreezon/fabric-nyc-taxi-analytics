@@ -33,16 +33,21 @@ taxi_zone_lookup_dir = "Files/bronze/reference/taxi_zone_lookup.csv"
 (
     spark.read.option("header", True).csv(taxi_zone_lookup_dir)
     .select(F.col("LocationID").cast("int").alias("zone_id"), "Borough", "Zone", "service_zone")
+    .withColumn("zone_key", F.col("zone_id").cast("string"))
     .write.format("delta").mode("overwrite").saveAsTable("gold.dim_zone")
 )
 
 # Dates: Created from the date range of the data
 dates = (
-    trips.select(F.col("pickup_ts").alias("date")).distinct()
+    trips.select(F.col("pickup_ts").cast("date").alias("date")).distinct()
     .withColumn("year", F.year("date"))
     .withColumn("month", F.month("date"))
+    .withColumn("month_name", F.date_format("date", "MMM"))
     .withColumn("day_of_week", F.date_format("date", "E"))
+    .withColumn("dow_num", F.dayofweek("date"))      # 1 = Sunday
     .withColumn("is_weekend", F.dayofweek("date").isin(1,7)) # checking if the day of the week (numeric) is either 1 or 7
+    .withColumn("year_month", F.date_format("date", "yyyy-MM"))
+    
 )
 dates.write.format("delta").mode("overwrite").saveAsTable("gold.dim_date")
 
@@ -58,7 +63,7 @@ dates.write.format("delta").mode("overwrite").saveAsTable("gold.dim_date")
 pay = spark.createDataFrame(
     [(1,"Credit card"),(2,"Cash"),(3,"No charge"),(4,"Dispute"),(5,"Unknown"),(6,"Voided trip")],
     ["payment_type","payment_name"])
-pay.write.format("delta").mode("overwrite").saveAsTable("gold.dim_payment_type")
+pay.write.format("delta").option("overwriteSchema", "true").mode("overwrite").saveAsTable("gold.dim_payment_type")
 
 # Fact table: Fact about the trip from bronze layer trip records.
 fact = (

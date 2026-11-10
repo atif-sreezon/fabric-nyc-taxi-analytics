@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "nyc-taxi-trip-dashboard"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "d83947b1-c97e-817d-4581-4f4b49a11d57"
+  }
+}

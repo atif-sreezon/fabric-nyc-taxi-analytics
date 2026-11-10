@@ -218,33 +218,10 @@
           "secureInput": false,
           "secureOutput": false
         },
-        "name": "silver_to_bronze_transformation",
-        "dependsOn": [
-          {
-            "activity": "bronze_to_silver_transformation",
-            "dependencyConditions": [
-              "Succeeded"
-            ]
-          }
-        ]
-      },
-      {
-        "type": "TridentNotebook",
-        "typeProperties": {
-          "notebookId": "23c64a7c-1ab3-9d29-43ff-3bf8699cc264",
-          "workspaceId": "00000000-0000-0000-0000-000000000000"
-        },
-        "policy": {
-          "timeout": "0.12:00:00",
-          "retry": 0,
-          "retryIntervalInSeconds": 30,
-          "secureInput": false,
-          "secureOutput": false
-        },
         "name": "silver_to_gold_transformation",
         "dependsOn": [
           {
-            "activity": "silver_to_bronze_transformation",
+            "activity": "bronze_to_silver_transformation",
             "dependencyConditions": [
               "Succeeded"
             ]

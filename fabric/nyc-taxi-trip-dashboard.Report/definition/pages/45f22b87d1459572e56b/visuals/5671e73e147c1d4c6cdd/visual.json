@@ -1,0 +1,123 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "5671e73e147c1d4c6cdd",
+  "position": {
+    "x": 592.84210526315792,
+    "y": 353.68421052631578,
+    "z": 5003,
+    "height": 390.73684210526318,
+    "width": 1327.1578947368421,
+    "tabOrder": 4003
+  },
+  "visual": {
+    "visualType": "scatterChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_date"
+                    }
+                  },
+                  "Property": "date"
+                }
+              },
+              "queryRef": "dim_date.date",
+              "nativeQueryRef": "date",
+              "active": true,
+              "format": "d MMMM yyyy"
+            }
+          ]
+        },
+        "X": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_trips"
+                    }
+                  },
+                  "Property": "Avg Temp C"
+                }
+              },
+              "queryRef": "fact_trips.Avg Temp C",
+              "nativeQueryRef": "Avg Temp C",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_trips"
+                    }
+                  },
+                  "Property": "Avg Daily Trips"
+                }
+              },
+              "queryRef": "fact_trips.Avg Daily Trips",
+              "nativeQueryRef": "Avg Daily Trips"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "e50028a545042014926b",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_date"
+              }
+            },
+            "Property": "date"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "bdfe5d45c7a2e0152b60",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_trips"
+              }
+            },
+            "Property": "Avg Daily Trips"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "bc2407a0186bec167c95",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_trips"
+              }
+            },
+            "Property": "Avg Temp C"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

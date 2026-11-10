@@ -1,0 +1,122 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "e238f3a5bb30aaba1871",
+  "position": {
+    "x": 592.84210526315792,
+    "y": 739.36842105263156,
+    "z": 5005,
+    "height": 340.21052631578948,
+    "width": 1327.1578947368421,
+    "tabOrder": 4005
+  },
+  "visual": {
+    "visualType": "scatterChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_zone"
+                    }
+                  },
+                  "Property": "Borough"
+                }
+              },
+              "queryRef": "dim_zone.Borough",
+              "nativeQueryRef": "Borough",
+              "active": true
+            }
+          ]
+        },
+        "X": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_trips"
+                    }
+                  },
+                  "Property": "Avg Trip Distance"
+                }
+              },
+              "queryRef": "fact_trips.Avg Trip Distance",
+              "nativeQueryRef": "Avg Trip Distance",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_trips"
+                    }
+                  },
+                  "Property": "Avg Fare"
+                }
+              },
+              "queryRef": "fact_trips.Avg Fare",
+              "nativeQueryRef": "Avg Fare"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "68f37e1f4d48802a6958",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_trips"
+              }
+            },
+            "Property": "Avg Trip Distance"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "62046a7bda1236b53c21",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_trips"
+              }
+            },
+            "Property": "Avg Fare"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "17fd748f6cc58a804582",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_zone"
+              }
+            },
+            "Property": "Borough"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

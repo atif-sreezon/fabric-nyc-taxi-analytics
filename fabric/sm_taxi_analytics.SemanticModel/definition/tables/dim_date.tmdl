@@ -1,0 +1,96 @@
+table dim_date
+	lineageTag: 165459ce-aaa5-44a3-852a-3cbde3eb7eba
+	sourceLineageTag: [gold].[dim_date]
+	dataCategory: Time
+
+	column date
+		dataType: dateTime
+		isKey
+		formatString: General Date
+		lineageTag: 8f80afb8-4d19-41a9-a066-ce93827aa724
+		sourceLineageTag: date
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = Automatic
+
+	column year
+		dataType: int64
+		formatString: 0
+		lineageTag: fdbff4bf-e9ca-44dc-a31d-c3ffca8b1ce1
+		sourceLineageTag: year
+		summarizeBy: none
+		sourceColumn: year
+
+		annotation SummarizationSetBy = Automatic
+
+	column month
+		dataType: int64
+		formatString: 0
+		lineageTag: ecb117b0-6516-4e1b-ae48-c657c4f7cd9d
+		sourceLineageTag: month
+		summarizeBy: none
+		sourceColumn: month
+
+		annotation SummarizationSetBy = Automatic
+
+	column day_of_week
+		dataType: string
+		lineageTag: 5ed13fcc-7831-404d-9ec4-fea9d7dd6f62
+		sourceLineageTag: day_of_week
+		summarizeBy: none
+		sourceColumn: day_of_week
+		sortByColumn: dow_num
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_weekend
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 807c7b3a-2717-4599-a177-772891118bad
+		sourceLineageTag: is_weekend
+		summarizeBy: none
+		sourceColumn: is_weekend
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_name
+		dataType: string
+		lineageTag: 3f9501e4-8458-4ba8-a073-e1b31ad844be
+		sourceLineageTag: month_name
+		summarizeBy: none
+		sourceColumn: month_name
+		sortByColumn: year_month
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column dow_num
+		dataType: int64
+		formatString: 0
+		lineageTag: 2a4007d0-a243-448a-822c-4b015d9c06a2
+		sourceLineageTag: dow_num
+		summarizeBy: none
+		sourceColumn: dow_num
+
+		annotation SummarizationSetBy = Automatic
+
+	column year_month
+		dataType: string
+		lineageTag: c6055754-4ee3-4528-9124-e182208e7f8b
+		sourceLineageTag: year_month
+		summarizeBy: none
+		sourceColumn: year_month
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_date = entity
+		mode: directLake
+		source
+			entityName: dim_date
+			schemaName: gold
+			expressionSource: 'DirectLake - lakehouse'
+

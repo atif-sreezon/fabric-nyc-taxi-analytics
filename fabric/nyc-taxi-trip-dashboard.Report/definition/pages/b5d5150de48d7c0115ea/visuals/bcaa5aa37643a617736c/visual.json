@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "bcaa5aa37643a617736c",
+  "position": {
+    "x": 17.507598784194528,
+    "y": 14.589665653495441,
+    "z": 1000,
+    "height": 46.68693009118541,
+    "width": 452.27963525835867,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "NYC Taxi Trip Dashboard",
+                    "textStyle": {
+                      "fontFamily": "Arial Black",
+                      "fontStyle": "italic",
+                      "fontSize": "24pt",
+                      "color": "#ffffff"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "parentGroupName": "148049782200250eb803"
+}

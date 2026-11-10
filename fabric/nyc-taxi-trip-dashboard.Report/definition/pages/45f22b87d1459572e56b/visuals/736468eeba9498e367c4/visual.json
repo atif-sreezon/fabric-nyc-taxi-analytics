@@ -1,0 +1,130 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "736468eeba9498e367c4",
+  "position": {
+    "x": 1000.421052631579,
+    "y": 744.421052631579,
+    "z": 5005,
+    "height": 335.15789473684208,
+    "width": 919.578947368421,
+    "tabOrder": 4005
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_trips"
+                    }
+                  },
+                  "Property": "Avg Daily Trips (Rain)"
+                }
+              },
+              "queryRef": "fact_trips.Avg Daily Trips (Rain)",
+              "nativeQueryRef": "Avg Daily Trips (Rain)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_trips"
+                    }
+                  },
+                  "Property": "Avg Daily Trips (Dry)"
+                }
+              },
+              "queryRef": "fact_trips.Avg Daily Trips (Dry)",
+              "nativeQueryRef": "Avg Daily Trips (Dry)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_trips"
+                    }
+                  },
+                  "Property": "Rain vs Dry %"
+                }
+              },
+              "queryRef": "fact_trips.Rain vs Dry %",
+              "nativeQueryRef": "Rain vs Dry %"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "fact_trips"
+                  }
+                },
+                "Property": "Avg Daily Trips (Rain)"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "b3fa3232e00076a50dc8",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_trips"
+              }
+            },
+            "Property": "Avg Daily Trips (Rain)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "6425b8f819b002a3824c",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_trips"
+              }
+            },
+            "Property": "Avg Daily Trips (Dry)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "fe371cd8c805a210d606",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_trips"
+              }
+            },
+            "Property": "Rain vs Dry %"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

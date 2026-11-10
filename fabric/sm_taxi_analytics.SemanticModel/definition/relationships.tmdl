@@ -1,0 +1,23 @@
+relationship c5635cfd-f4b1-f2b2-e58f-9b1904fb336e
+	fromColumn: fact_trips.date
+	toColumn: dim_date.date
+
+relationship 46d44005-1d08-0403-064e-4094717c46c5
+	fromColumn: fact_trips.pickup_zone_id
+	toColumn: dim_zone.zone_id
+
+relationship 006b1386-a4f4-f467-2b4c-35c13bcaea60
+	isActive: false
+	fromColumn: fact_trips.dropoff_zone_id
+	toColumn: dim_zone.zone_id
+
+relationship 12f7e988-fbc7-93ea-17fc-851001c9dd1d
+	fromColumn: fact_trips.payment_type
+	toColumn: dim_payment_type.payment_type
+
+relationship 4e709ab3-a54e-7e74-ecce-987685b31381
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: fact_weather_daily.date
+	toColumn: dim_date.date
+
