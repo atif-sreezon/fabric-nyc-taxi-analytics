@@ -1,0 +1,75 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "efaf3b80337cc9308e11",
+  "position": {
+    "x": 1586.5263157894738,
+    "y": 395.78947368421052,
+    "z": 5003,
+    "height": 384,
+    "width": 333.4736842105263,
+    "tabOrder": 4003
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_trips"
+                    }
+                  },
+                  "Property": "Weekend Share %"
+                }
+              },
+              "queryRef": "fact_trips.Weekend Share %",
+              "nativeQueryRef": "Weekend Share %",
+              "format": "0.00%;-0.00%;0.00%"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "fact_trips"
+                  }
+                },
+                "Property": "Weekend Share %"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "ae9fe5520bc01466722e",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_trips"
+              }
+            },
+            "Property": "Weekend Share %"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+expression 'DirectLake - lakehouse' =
+		let
+		    Source = AzureStorage.DataLake("https://onelake.dfs.fabric.microsoft.com/c5e0c809-e69b-461d-aec8-19d28ce16c9d/615cb6d6-2968-47da-bec7-f2455c878629", [HierarchicalNavigation=true])
+		in
+		    Source
+	lineageTag: 4b60aa87-1223-412f-bc65-080b9d92f189
+
+	annotation PBI_IncludeFutureArtifacts = False
+
+	annotation PBI_RemovedChildren = [{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[dbo].[tbl_data_catalogue]"}},"objectType":"Table"},{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[silver].[weather_daily]"}},"objectType":"Table"},{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[silver].[yellow_trips]"}},"objectType":"Table"}]
+

@@ -1,0 +1,75 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "65497bfddceea4377a8c",
+  "position": {
+    "x": 1522.5263157894738,
+    "y": 404.21052631578948,
+    "z": 5004,
+    "height": 335.15789473684208,
+    "width": 397.4736842105263,
+    "tabOrder": 4004
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_trips"
+                    }
+                  },
+                  "Property": "Revenue per Mile"
+                }
+              },
+              "queryRef": "fact_trips.Revenue per Mile",
+              "nativeQueryRef": "Revenue per Mile",
+              "format": "\\$#,0.00;-\\$#,0.00;\\$#,0.00"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "fact_trips"
+                  }
+                },
+                "Property": "Revenue per Mile"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "044d6c7a9bea55104782",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_trips"
+              }
+            },
+            "Property": "Revenue per Mile"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

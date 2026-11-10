@@ -1,0 +1,109 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "0fc983b6194dbbbbd7d9",
+  "position": {
+    "x": 1246.3157894736842,
+    "y": 75.78947368421052,
+    "z": 5002,
+    "height": 328.42105263157896,
+    "width": 673.68421052631584,
+    "tabOrder": 4002
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_trips"
+                    }
+                  },
+                  "Property": "pickup_hour"
+                }
+              },
+              "queryRef": "fact_trips.pickup_hour",
+              "nativeQueryRef": "Pickup Hour",
+              "active": true,
+              "displayName": "Pickup Hour"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_trips"
+                    }
+                  },
+                  "Property": "Avg Tip %"
+                }
+              },
+              "queryRef": "fact_trips.Avg Tip %",
+              "nativeQueryRef": "Avg Tip %",
+              "format": "0.00%;-0.00%;0.00%"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "fact_trips"
+                  }
+                },
+                "Property": "Avg Tip %"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "c960cba884313764e0d3",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_trips"
+              }
+            },
+            "Property": "Avg Tip %"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "23fb0649a0bab769505a",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_trips"
+              }
+            },
+            "Property": "pickup_hour"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

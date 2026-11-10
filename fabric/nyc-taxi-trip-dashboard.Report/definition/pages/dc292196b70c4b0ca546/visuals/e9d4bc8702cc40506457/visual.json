@@ -1,0 +1,109 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "e9d4bc8702cc40506457",
+  "position": {
+    "x": 592.84210526315792,
+    "y": 404.21052631578948,
+    "z": 5001,
+    "height": 335.15789473684208,
+    "width": 929.68421052631584,
+    "tabOrder": 4001
+  },
+  "visual": {
+    "visualType": "columnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_payment_type"
+                    }
+                  },
+                  "Property": "payment_name"
+                }
+              },
+              "queryRef": "dim_payment_type.payment_name",
+              "nativeQueryRef": "Payment Type",
+              "active": true,
+              "displayName": "Payment Type"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_trips"
+                    }
+                  },
+                  "Property": "Avg Tip %"
+                }
+              },
+              "queryRef": "fact_trips.Avg Tip %",
+              "nativeQueryRef": "Avg Tip %",
+              "format": "0.00%;-0.00%;0.00%"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "fact_trips"
+                  }
+                },
+                "Property": "Avg Tip %"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "c3f6cf696d187434e17b",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_trips"
+              }
+            },
+            "Property": "Avg Tip %"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "5598090a85495c511506",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_payment_type"
+              }
+            },
+            "Property": "payment_name"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

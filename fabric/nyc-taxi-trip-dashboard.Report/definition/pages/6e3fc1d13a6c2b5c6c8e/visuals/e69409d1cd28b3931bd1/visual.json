@@ -1,0 +1,108 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "e69409d1cd28b3931bd1",
+  "position": {
+    "x": 592.84210526315792,
+    "y": 779.78947368421052,
+    "z": 5004,
+    "height": 299.78947368421052,
+    "width": 1327.1578947368421,
+    "tabOrder": 4004
+  },
+  "visual": {
+    "visualType": "clusteredColumnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_date"
+                    }
+                  },
+                  "Property": "is_weekend"
+                }
+              },
+              "queryRef": "dim_date.is_weekend",
+              "nativeQueryRef": "Is Weekend",
+              "active": true,
+              "displayName": "Is Weekend"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_trips"
+                    }
+                  },
+                  "Property": "Avg Daily Trips"
+                }
+              },
+              "queryRef": "fact_trips.Avg Daily Trips",
+              "nativeQueryRef": "Avg Daily Trips"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "fact_trips"
+                  }
+                },
+                "Property": "Avg Daily Trips"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "be258dc6d2d5b7ed2b86",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_trips"
+              }
+            },
+            "Property": "Avg Daily Trips"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "434cd2e27980516c78c0",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_date"
+              }
+            },
+            "Property": "is_weekend"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

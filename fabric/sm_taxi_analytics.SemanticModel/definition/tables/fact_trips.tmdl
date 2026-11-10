@@ -1,0 +1,345 @@
+table fact_trips
+	lineageTag: 432bfbbd-8bd2-4a68-becf-3ad4c80cdab5
+	sourceLineageTag: [gold].[fact_trips]
+
+	measure 'Total Trips' = COUNTROWS(fact_trips)
+		formatString: 0
+		lineageTag: 96553a10-554f-4e3a-85b4-df79e488f6ae
+
+		changedProperty = Name
+
+	measure 'Total Revenue' = SUM(fact_trips[total_amount])
+		formatString: \$#,0.00;-\$#,0.00;\$#,0.00
+		lineageTag: 916788c3-485c-46bd-900e-5712fcf899df
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-AU"}
+
+	measure 'Total Fare' = SUM(fact_trips[fare_amount])
+		formatString: \$#,0.00;-\$#,0.00;\$#,0.00
+		lineageTag: 13883265-0ede-486c-82e5-4d490d7955d1
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-AU"}
+
+	measure 'Avg Fare' = DIVIDE([Total Fare], [Total Trips])
+		formatString: \$#,0.00;-\$#,0.00;\$#,0.00
+		lineageTag: 4b2921db-0459-4bb7-bf90-de9a71b47789
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-AU"}
+
+	measure 'Avg Trip Distance' = AVERAGE ( fact_trips[trip_distance] )
+		lineageTag: ead7774e-7067-4321-8f22-915e6df99f1e
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Avg Trip Minutes' = AVERAGE ( fact_trips[trip_minutes] )
+		lineageTag: bed39952-2677-4f25-a10b-4320049f506f
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Avg Tip %' = DIVIDE (SUM(fact_trips[tip_amount] ),SUM ( fact_trips[fare_amount]))
+		lineageTag: abb9564a-d33e-480c-b704-4f242682af6e
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Revenue per Mile' = DIVIDE ([Total Revenue], SUM ( fact_trips[trip_distance]))
+		lineageTag: 577b08a2-4698-4490-ad6e-33249419ce08
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Avg Passengers' = AVERAGE (fact_trips[passenger_count])
+		lineageTag: 37af23e0-5115-426d-a005-8ac3002de910
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Days in Selection' = DISTINCTCOUNT (dim_date[date])
+		formatString: 0
+		lineageTag: 1df6bf4f-d16d-45b3-9bbd-21e61f8a5eb4
+
+		changedProperty = Name
+
+	measure 'Avg Daily Trips' = DIVIDE ([Total Trips], [Days in Selection])
+		lineageTag: 95772ae0-21cc-41b2-b8e5-b460dcf620f7
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Trips Prev Month' =
+			CALCULATE( // Calculate the total trips for last month
+			    [Total Trips],
+			    DATEADD(dim_date[date], -1, MONTH) // Filter for last month selection
+			)
+		formatString: 0
+		lineageTag: 7708ca00-ee15-4383-ac6c-cd7bb7ff2719
+
+		changedProperty = Name
+
+	measure 'Trips MoM %' =
+			DIVIDE(
+			    // Month on Month trip increase or decrease by %
+			    [Total Trips] - [Trips Prev Month], [Trips Prev Month]
+			    )
+		lineageTag: df1d481a-b46f-4a52-9019-430c220ee9c4
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Weekend Share %' =
+			DIVIDE(
+			    CALCULATE(
+			        [Total Trips], dim_date[is_weekend]=TRUE()
+			    ),
+			    [Total Trips]
+			)
+		lineageTag: 77c12d03-e7ba-4449-a5c8-e2b7bd4e76f3
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Dropoff Trips' =
+			CALCULATE(
+			    [Total Trips],
+			    USERELATIONSHIP(fact_trips[dropoff_zone_id], dim_zone[zone_id])
+			)
+		formatString: 0
+		lineageTag: 4ef816e6-9a94-4000-b2bd-da297012393d
+
+		changedProperty = Name
+
+	measure 'Top Pickup Zone' =
+			MAXX(
+			    TOPN(1,VALUES(dim_zone[Zone]), [Total Trips]), dim_zone[Zone]
+			)
+		lineageTag: 0be178d4-a967-4fd0-a945-db3508e3e969
+
+		changedProperty = Name
+
+	measure 'Avg Temp C' = AVERAGE(fact_weather_daily[temp_mean_c])
+		lineageTag: eb28ba80-622e-41a2-8695-cd5552ca69d2
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Avg Precip mm' = AVERAGE(fact_weather_daily[precipitation_mm])
+		lineageTag: f3d02eeb-8002-4b92-bbb0-c4a9a9ccef4e
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Avg Daily Trips (Rain)' =
+			CALCULATE(
+			    [Avg Daily Trips], fact_weather_daily[is_rainy] = TRUE()
+			    )
+		lineageTag: 78aaf5d3-351c-424c-a8f4-ca347c87d6c4
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Avg Daily Trips (Dry)' =
+			CALCULATE(
+			    [Avg Daily Trips], fact_weather_daily[precip_category] = "Dry"
+			)
+		lineageTag: 9b0e5b65-d033-4bb5-8606-c336654f3283
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Rain vs Dry %' =
+			DIVIDE(
+			    [Avg Daily Trips (Rain)] - [Avg Daily Trips (Dry)], [Avg Daily Trips (Dry)]
+			)
+		lineageTag: 1afb8f22-6c0f-4034-b295-9dcb56c17922
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 52e23b65-bbfa-45e5-82d8-f2a16428d00a
+		sourceLineageTag: date
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = Automatic
+
+	column pickup_hour
+		dataType: int64
+		formatString: 0
+		lineageTag: bfa8973f-e2b7-4188-96ce-7c863a21c047
+		sourceLineageTag: pickup_hour
+		summarizeBy: none
+		sourceColumn: pickup_hour
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+	column pickup_zone_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: ceff3057-53dc-4d90-9941-28b824fcac3b
+		sourceLineageTag: pickup_zone_id
+		summarizeBy: none
+		sourceColumn: pickup_zone_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column dropoff_zone_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 7d2895b6-92a6-401d-a586-6e00dbe052b8
+		sourceLineageTag: dropoff_zone_id
+		summarizeBy: none
+		sourceColumn: dropoff_zone_id
+
+		changedProperty = IsHidden
+
+		changedProperty = SummarizeBy
+
+		annotation SummarizationSetBy = User
+
+	column payment_type
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 209bddbe-d8a3-4771-b2a5-a42dc405ceef
+		sourceLineageTag: payment_type
+		summarizeBy: none
+		sourceColumn: payment_type
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column passenger_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 30041d08-ea1d-4d06-9804-5357a46c6445
+		sourceLineageTag: passenger_count
+		summarizeBy: sum
+		sourceColumn: passenger_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column trip_distance
+		dataType: double
+		lineageTag: fbade6be-9851-4d49-a63e-2808cdc69de5
+		sourceLineageTag: trip_distance
+		summarizeBy: sum
+		sourceColumn: trip_distance
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column trip_minutes
+		dataType: double
+		lineageTag: 7dd01733-677f-4078-8530-c3e0284f1e1b
+		sourceLineageTag: trip_minutes
+		summarizeBy: sum
+		sourceColumn: trip_minutes
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column fare_amount
+		dataType: double
+		lineageTag: 9c1c2057-2977-4cf9-a3b1-10b277b0187d
+		sourceLineageTag: fare_amount
+		summarizeBy: sum
+		sourceColumn: fare_amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column tip_amount
+		dataType: double
+		lineageTag: c1fe66b4-07aa-45a4-868b-1c7cabd5c660
+		sourceLineageTag: tip_amount
+		summarizeBy: sum
+		sourceColumn: tip_amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column tip_pct
+		dataType: double
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: e9eb1be6-8340-4a1f-9c5b-01164de97b0c
+		sourceLineageTag: tip_pct
+		summarizeBy: none
+		sourceColumn: tip_pct
+
+		changedProperty = SummarizeBy
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = User
+
+	column total_amount
+		dataType: double
+		formatString: "£"#,0.###############;-"£"#,0.###############;"£"#,0.###############
+		lineageTag: 7503904e-8bd8-488b-9d38-69436488c6cf
+		sourceLineageTag: total_amount
+		summarizeBy: sum
+		sourceColumn: total_amount
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	column pickup_month
+		dataType: string
+		lineageTag: db7ea711-39e2-49e3-b944-f44564629055
+		sourceLineageTag: pickup_month
+		summarizeBy: none
+		sourceColumn: pickup_month
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_trips = entity
+		mode: directLake
+		source
+			entityName: fact_trips
+			schemaName: gold
+			expressionSource: 'DirectLake - lakehouse'
+

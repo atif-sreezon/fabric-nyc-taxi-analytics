@@ -1,0 +1,107 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "45bf8b0dee30ee41a4d9",
+  "position": {
+    "x": 592.84210526315792,
+    "y": 75.78947368421052,
+    "z": 5001,
+    "height": 277.89473684210526,
+    "width": 1328.8421052631579,
+    "tabOrder": 4001
+  },
+  "visual": {
+    "visualType": "columnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather_daily"
+                    }
+                  },
+                  "Property": "precip_category"
+                }
+              },
+              "queryRef": "fact_weather_daily.precip_category",
+              "nativeQueryRef": "precip_category",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_trips"
+                    }
+                  },
+                  "Property": "Avg Daily Trips"
+                }
+              },
+              "queryRef": "fact_trips.Avg Daily Trips",
+              "nativeQueryRef": "Avg Daily Trips"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "fact_trips"
+                  }
+                },
+                "Property": "Avg Daily Trips"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "349b8c30d33ba40cd9e7",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_trips"
+              }
+            },
+            "Property": "Avg Daily Trips"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "6036a4d4403267037602",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_weather_daily"
+              }
+            },
+            "Property": "precip_category"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

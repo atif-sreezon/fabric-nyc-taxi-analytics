@@ -1,0 +1,106 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "cebce1c8c6099baea8d4",
+  "position": {
+    "x": 592.84210526315792,
+    "y": 744.421052631579,
+    "z": 5002,
+    "height": 335.15789473684208,
+    "width": 407.57894736842104,
+    "tabOrder": 4002
+  },
+  "visual": {
+    "visualType": "columnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather_daily"
+                    }
+                  },
+                  "Property": "temp_band"
+                }
+              },
+              "queryRef": "fact_weather_daily.temp_band",
+              "nativeQueryRef": "temp_band",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_trips"
+                    }
+                  },
+                  "Property": "Avg Daily Trips"
+                }
+              },
+              "queryRef": "fact_trips.Avg Daily Trips",
+              "nativeQueryRef": "Avg Daily Trips"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "fact_weather_daily"
+                  }
+                },
+                "Property": "temp_band"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "58ceaacadbc02d61ab35",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_weather_daily"
+              }
+            },
+            "Property": "temp_band"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "6d68806040ec7993b78c",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_trips"
+              }
+            },
+            "Property": "Avg Daily Trips"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "2eb9796a9244ee1d3230",
+  "position": {
+    "x": 592.84210526315792,
+    "y": 75.78947368421052,
+    "z": 5003,
+    "height": 328.42105263157896,
+    "width": 653.47368421052636,
+    "tabOrder": 4003
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_date"
+                    }
+                  },
+                  "Property": "year_month"
+                }
+              },
+              "queryRef": "dim_date.year_month",
+              "nativeQueryRef": "year_month",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_date"
+                    }
+                  },
+                  "Property": "month_name"
+                }
+              },
+              "queryRef": "dim_date.month_name",
+              "nativeQueryRef": "month_name",
+              "active": false
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_trips"
+                    }
+                  },
+                  "Property": "Avg Fare"
+                }
+              },
+              "queryRef": "fact_trips.Avg Fare",
+              "nativeQueryRef": "Avg Fare"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "3410abcd964b639e7289",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_trips"
+              }
+            },
+            "Property": "Avg Fare"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "0e08c092e7ccae22ac0d",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_date"
+              }
+            },
+            "Property": "year_month"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "964046fa013000261b21",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_date"
+              }
+            },
+            "Property": "month_name"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}
