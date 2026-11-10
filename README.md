@@ -105,6 +105,21 @@ The workspace is connected to the `dev` branch of this repository using Fabric G
 ### Successful pipeline run
 ![Pipeline run](docs/screenshots/pipeline-run.png)
 
+### Dashboard Page 1
+![Overview](docs/screenshots/dashboard-page-1.png)
+
+### Dashboard Page 2
+![Time Patterns](docs/screenshots/dashboard-page-2.png)
+
+### Dashboard Page 3
+![Zone Map](docs/screenshots/dashboard-page-3.png)
+
+### Dashboard Page 4
+![Weather Impact](docs/screenshots/dashboard-page-4.png)
+
+### Dashboard Page 5
+![Fares & Tip](docs/screenshots/dashboard-page-5.png)
+
 ## Repository structure
 
 ```
@@ -126,6 +141,8 @@ The workspace is connected to the `dev` branch of this repository using Fabric G
 2. **A Fabric admin must enable Git integration before it can be used.** The relevant tenant permission has to be turned on for users before the GitHub option works in workspace settings. If it's missing, ask the admin rather than debugging the repo.
 
 3. **GitHub integration requires an access token, and fine-grained tokens need the right permissions.** With a fine-grained personal access token, the repository permissions must be granted up to **Read and Write** level. Without write access, Fabric can't create the folder or edit the repository, and connecting or committing fails.
+
+4. **Creating Custom Shape Map in Power BI** For shapre map, add a field to the location field first to get the 'Format Visuals' option.
 
 ## Skills demonstrated
 
